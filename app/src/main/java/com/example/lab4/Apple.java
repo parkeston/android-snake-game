@@ -20,6 +20,10 @@ public class Apple extends ImageView {
         final Context context1 = context;
 
         setImageDrawable(getResources().getDrawable(R.drawable.apple, null));
+
+        if (isInEditMode())
+            return;
+
         this.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {

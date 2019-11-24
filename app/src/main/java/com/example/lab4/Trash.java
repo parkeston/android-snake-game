@@ -30,9 +30,11 @@ public class Trash extends ImageView {
 
         final Context context1 = context;
 
-        gameManager = ((IGameManager) context);
-
         setImageDrawable(getResources().getDrawable(R.drawable.trash, null));
+        if (isInEditMode())
+            return;
+
+        gameManager = ((IGameManager) context);
         this.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -40,11 +42,6 @@ public class Trash extends ImageView {
                 thisView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
-    }
-
-    @Override
-    public boolean isInEditMode() {
-        return true;
     }
 
     @Override

@@ -7,11 +7,9 @@ import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,8 +25,6 @@ public class MainActivity extends AppCompatActivity implements IGameManager {
 
     private ArrayList<View> applesList;
     private ArrayList<View> trashList;
-
-    private RelativeLayout layout;
 
     private TextView appleCounterText;
     private int appleCounter;
@@ -81,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements IGameManager {
         });
 
 
-        layout = findViewById(R.id.main);
         appleCounterText = findViewById(R.id.appleCounter);
     }
 
@@ -101,12 +96,7 @@ public class MainActivity extends AppCompatActivity implements IGameManager {
 
         appleCounter++;
         appleCounterText.setText(String.valueOf(appleCounter));
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                layout.removeView(apple);
-            }
-        });
+        apple.setAlpha(0);
 
         if (applesList.size() == 0)
             Toast.makeText(this, "You win!", Toast.LENGTH_LONG).show();
@@ -125,11 +115,6 @@ public class MainActivity extends AppCompatActivity implements IGameManager {
     @Override
     public void removeTrash(final View view) {
         trashList.remove(view);
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                layout.removeView(view);
-            }
-        });
+        view.setAlpha(0);
     }
 }

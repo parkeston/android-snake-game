@@ -41,8 +41,6 @@ public class Snake extends View {
 
         startPosition = new PointF(500, 500);
 
-        gameManager = ((IGameManager) context);
-
         bodyCells = new ArrayList<>();
 
 
@@ -50,6 +48,11 @@ public class Snake extends View {
             bodyCells.add(new SnakeBodyCell(startPosition.x, startPosition.y));
             startPosition.offset(0, -radius * 2);
         }
+
+        if (isInEditMode())
+            return;
+
+        gameManager = ((IGameManager) context);
     }
 
     @Override
